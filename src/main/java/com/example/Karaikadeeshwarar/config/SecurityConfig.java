@@ -45,7 +45,7 @@ public CorsConfigurationSource corsConfigurationSource() {
 
     config.setAllowedOrigins(List.of(
         "https://temple-frontend-git-main-priya050201s-projects.vercel.app",
-        "https://temple-frontend-7c805zjfx-priya050201s-projects.vercel.app",
+        "https://temple-frontend-p0ldlviif-priya050201s-projects.vercel.app",
         "https://temple-frontend-ashen.vercel.app",
         "http://localhost:5173"
     ));
