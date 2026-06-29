@@ -41,10 +41,11 @@ public class SecurityConfig {
 
         CorsConfiguration config = new CorsConfiguration();
 
-        config.setAllowedOrigins(
-                List.of("https://temple-frontend-priya050201s-projects.vercel.app",
-                        "http://localhost:5173")
-        );
+        config.setAllowedOriginPatterns(List.of(
+    "https://temple-frontend-priya050201s-projects.vercel.app",
+    "http://localhost:5173",
+    "https://*.vercel.app"
+));
 
         config.setAllowedMethods(
                 List.of("GET","POST","PUT","DELETE","OPTIONS")
