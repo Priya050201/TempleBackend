@@ -42,9 +42,10 @@ public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         CorsConfiguration config = new CorsConfiguration();
 
         config.setAllowedOriginPatterns(List.of(
-    "https://temple-frontend-git-main-priya050201s-projects.vercel.app/api/home",
-    "http://localhost:5173",
-    "https://temple-frontend-2o6zbxayq-priya050201s-projects.vercel.app/api/home"
+    "https://temple-frontend-ashen.vercel.app",
+            "https://temple-frontend-git-main-priya050201s-projects.vercel.app",
+            "https://temple-frontend-7c805zjfx-priya050201s-projects.vercel.app"
+    "http://localhost:5173"
 ));
 
         config.setAllowedMethods(
