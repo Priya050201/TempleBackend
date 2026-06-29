@@ -44,7 +44,7 @@ public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         config.setAllowedOriginPatterns(List.of(
     "https://temple-frontend-priya050201s-projects.vercel.app",
     "http://localhost:5173",
-    "https://*.vercel.app"
+    "https://temple-frontend-priya050201s-projects.vercel.app/"
 ));
 
         config.setAllowedMethods(
