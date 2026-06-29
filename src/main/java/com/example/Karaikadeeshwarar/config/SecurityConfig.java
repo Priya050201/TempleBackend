@@ -18,23 +18,23 @@ import java.util.List;
 public class SecurityConfig {
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http)
-            throws Exception {
+public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        http
-                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-                .csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/**").permitAll()
-                        .requestMatchers("/api/**").permitAll()
-                        .requestMatchers("/festival/**").permitAll()
-                        .requestMatchers("/renovation/**").permitAll()
-                        .requestMatchers("/donation/**").permitAll()
-                        .anyRequest().authenticated()
-                );
+    http
+        .csrf(csrf -> csrf.disable())
+        .authorizeHttpRequests(auth -> auth
+            .requestMatchers("/auth/**").permitAll()
+            .requestMatchers("/api/**").permitAll()
+            .requestMatchers("/festival/**").permitAll()
+            .requestMatchers("/renovation/**").permitAll()
+            .requestMatchers("/donation/**").permitAll()
+            .anyRequest().permitAll()   // IMPORTANT for now
+        )
+        .formLogin(form -> form.disable())
+        .httpBasic(basic -> basic.disable());
 
-        return http.build();
-    }
+    return http.build();
+}
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
