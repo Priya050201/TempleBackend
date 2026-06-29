@@ -17,10 +17,12 @@ import java.util.List;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    @Bean
+
+@Bean
 public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
     http
+        .cors(cors -> cors.configurationSource(corsConfigurationSource()))   // ADD THIS
         .csrf(csrf -> csrf.disable())
         .authorizeHttpRequests(auth -> auth
             .requestMatchers("/auth/**").permitAll()
@@ -28,7 +30,7 @@ public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
             .requestMatchers("/festival/**").permitAll()
             .requestMatchers("/renovation/**").permitAll()
             .requestMatchers("/donation/**").permitAll()
-            .anyRequest().permitAll()   // IMPORTANT for now
+            .anyRequest().permitAll()
         )
         .formLogin(form -> form.disable())
         .httpBasic(basic -> basic.disable());
@@ -36,33 +38,34 @@ public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     return http.build();
 }
 
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
+ @Bean
+public CorsConfigurationSource corsConfigurationSource() {
 
-        CorsConfiguration config = new CorsConfiguration();
+    CorsConfiguration config = new CorsConfiguration();
 
-        config.setAllowedOriginPatterns(List.of(
-    "https://temple-frontend-ashen.vercel.app",
-            "https://temple-frontend-git-main-priya050201s-projects.vercel.app",
-            "https://temple-frontend-7c805zjfx-priya050201s-projects.vercel.app",
-    "http://localhost:5173"
-));
+    config.setAllowedOrigins(List.of(
+        "https://temple-frontend-git-main-priya050201s-projects.vercel.app",
+        "https://temple-frontend-7c805zjfx-priya050201s-projects.vercel.app",
+        "https://temple-frontend-ashen.vercel.app",
+        "http://localhost:5173"
+    ));
 
-        config.setAllowedMethods(
-                List.of("GET","POST","PUT","DELETE","OPTIONS")
-        );
+    config.setAllowedMethods(List.of(
+        "GET", "POST", "PUT", "DELETE", "OPTIONS"
+    ));
 
-        config.setAllowedHeaders(
-                List.of("*")
-        );
+    config.setAllowedHeaders(List.of("*"));
 
-        UrlBasedCorsConfigurationSource source =
-                new UrlBasedCorsConfigurationSource();
+    // only if using Authorization header / JWT
+    config.setAllowCredentials(true);
 
-        source.registerCorsConfiguration("/**", config);
+    UrlBasedCorsConfigurationSource source =
+            new UrlBasedCorsConfigurationSource();
 
-        return source;
-    }
+    source.registerCorsConfiguration("/**", config);
+
+    return source;
+}
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
